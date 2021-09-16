@@ -99,7 +99,9 @@ public class Hotel
 	public int getRegularCustomerCost(LocalDate initialDate,LocalDate finalDate)
 	{
 
-		Calender calender = new Calender(initialDate, finalDate);
+		Calender calender = new Calender();
+		calender.setInitialDate(initialDate);
+		calender.setFinalDate(finalDate);
 		int numberOfWeekDays=calender.getNumberOfWeekDays();
 		int numberOfWeekends=calender.getNumberOfWeekends();
 
@@ -109,7 +111,9 @@ public class Hotel
 	public int getRewardCustomerCost(LocalDate initialDate,LocalDate finalDate)
 	{
 
-		Calender calender = new Calender(initialDate, finalDate);
+		Calender calender = new Calender();
+		calender.setInitialDate(initialDate);
+		calender.setFinalDate(finalDate);
 		int numberOfWeekDays=calender.getNumberOfWeekDays();
 		int numberOfWeekends=calender.getNumberOfWeekends();
 
