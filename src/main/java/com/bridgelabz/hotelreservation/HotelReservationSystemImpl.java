@@ -64,6 +64,18 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 		return cheapestHotel;
 		
 	}
+	
+	@Override
+	public Hotel findBestRatedHotel(LocalDate initialDate,LocalDate finalDate)
+	{
+		
+		Hotel bestRateHotel=hotelList.stream().max((firstHotel, secondHotel)->Integer
+							.compare(firstHotel.getRating(), secondHotel.getRating()))
+							.get();
+		
+		return bestRateHotel;
+		
+	}
 
 	
 

@@ -10,8 +10,9 @@ public interface HotelReservationSystemIF
 	public Hotel getHotel(String name);
 	public List<Hotel> findCheapestHotelsList(LocalDate initialDate,LocalDate finalDate);
 	public Hotel findCheapHotelWithBestRating(LocalDate initialDate,LocalDate finalDate);
+	public Hotel findBestRatedHotel(LocalDate initialDate,LocalDate finalDate);
 
-	
-	
+
+
 
 }
