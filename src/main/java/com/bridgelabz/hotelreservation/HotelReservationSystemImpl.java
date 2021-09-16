@@ -18,9 +18,9 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 	}
 
 	@Override
-	public void addHotel(String name, int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rating) 
+	public void addHotel(String name, int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rewardCustomerWeekDayRate,int rewardCustomerWeekEndrate,int rating) 
 	{
-		hotelList.add(new Hotel(name,regularCustomerWeekDayRate,regularCustomerWeekEndRate,rating));
+		hotelList.add(new Hotel(name,regularCustomerWeekDayRate,regularCustomerWeekEndRate,rewardCustomerWeekDayRate,rewardCustomerWeekEndrate,rating));
 
 	}
 
