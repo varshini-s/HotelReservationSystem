@@ -6,13 +6,15 @@ import java.util.List;
 public class Hotel 
 {
 	private String name;
-	private int regularCustomerRate;
+	private int regularCustomerWeekDayRate;
+	private int regularCustomerWeekEndRate;
 	private List<Customer> customers;
 
-	public Hotel(String name,int regularCustomerRate) 
+	public Hotel(String name,int regularCustomerWeekDayRate,int regularCustomerWeekEndRate ) 
 	{
 		this.name=name;
-		this.regularCustomerRate=regularCustomerRate;
+		this.regularCustomerWeekDayRate=regularCustomerWeekDayRate;
+		this.regularCustomerWeekEndRate=regularCustomerWeekEndRate;
 
 	}
 
@@ -26,15 +28,24 @@ public class Hotel
 		this.name = name;
 	}
 
-	public int getRegularCustomerRate() 
+	public int getRegularCustomerWeekDayRate() 
 	{
-		return regularCustomerRate;
+		return regularCustomerWeekDayRate;
 	}
 
-	public void setRegularCustomerRate(int regularCustomerRate) 
-	{
-		this.regularCustomerRate = regularCustomerRate;
+	public void setRegularCustomerWeekDayRate(int regularCustomerWeekDayRate) {
+		this.regularCustomerWeekDayRate = regularCustomerWeekDayRate;
 	}
+
+	public int getRegularCustomerWeekEndRate() 
+	{
+		return regularCustomerWeekEndRate;
+	}
+
+	public void setRegularCustomerWeekEndRate(int regularCustomerWeekEndRate) {
+		this.regularCustomerWeekEndRate = regularCustomerWeekEndRate;
+	}
+
 
 	public List<Customer> getCustomers() 
 	{
@@ -70,7 +81,8 @@ public class Hotel
 
 		final Hotel other = (Hotel) obj;
 
-		if(this.name.equals(other.name)==false||(this.regularCustomerRate!=other.regularCustomerRate))
+		if(this.name.equals(other.name)==false||(this.regularCustomerWeekDayRate!=other.regularCustomerWeekDayRate)
+		  ||this.regularCustomerWeekEndRate!=other.regularCustomerWeekEndRate)
 
 		{
 			return false;
