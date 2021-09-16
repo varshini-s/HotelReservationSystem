@@ -1,7 +1,6 @@
 package com.bridgelabz.hotelreservation;
 
 import java.time.LocalDate;
-import java.util.List;
 
 
 public class Hotel 
@@ -13,8 +12,6 @@ public class Hotel
 	private int rewardCustomerWeekEndRate;
 	private int rating;
 
-
-	private List<Customer> customers;
 
 	public Hotel(String name,int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rewardCustomerWeekDayRate,int rewardCustomerWeekEndRate, int rating ) 
 	{
@@ -76,15 +73,6 @@ public class Hotel
 		this.regularCustomerWeekEndRate = regularCustomerWeekEndRate;
 	}
 
-	public List<Customer> getCustomers() 
-	{
-		return customers;
-	}
-
-	public void setCustomers(List<Customer> customers) 
-	{
-		this.customers = customers;
-	}
 
 	public int getRating() {
 		return rating;
@@ -93,7 +81,6 @@ public class Hotel
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-
 
 
 	public int getRegularCustomerCost(LocalDate initialDate,LocalDate finalDate)
@@ -125,7 +112,6 @@ public class Hotel
 	public boolean equals(Object obj) 
 
 	{
-
 		if (obj == null) 
 		{
 			return false;
@@ -152,7 +138,6 @@ public class Hotel
 
 		return true;
 	}
-
 
 
 }
