@@ -105,6 +105,16 @@ public class Hotel
 
 		return (this.regularCustomerWeekDayRate*numberOfWeekDays)+(this.regularCustomerWeekEndRate*numberOfWeekends);
 	}
+	
+	public int getRewardCustomerCost(LocalDate initialDate,LocalDate finalDate)
+	{
+
+		Calender calender = new Calender(initialDate, finalDate);
+		int numberOfWeekDays=calender.getNumberOfWeekDays();
+		int numberOfWeekends=calender.getNumberOfWeekends();
+
+		return (this.rewardCustomerWeekDayRate*numberOfWeekDays)+(this.rewardCustomerWeekEndRate*numberOfWeekends);
+	}
 
 
 	@Override
