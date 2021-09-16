@@ -9,13 +9,17 @@ public class Hotel
 	private String name;
 	private int regularCustomerWeekDayRate;
 	private int regularCustomerWeekEndRate;
+	private int rating;
+
+
 	private List<Customer> customers;
 
-	public Hotel(String name,int regularCustomerWeekDayRate,int regularCustomerWeekEndRate ) 
+	public Hotel(String name,int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rating ) 
 	{
 		this.name=name;
 		this.regularCustomerWeekDayRate=regularCustomerWeekDayRate;
 		this.regularCustomerWeekEndRate=regularCustomerWeekEndRate;
+		this.rating=rating;
 
 	}
 
@@ -28,9 +32,6 @@ public class Hotel
 	{
 		this.name = name;
 	}
-
-
-	
 
 	public int getRegularCustomerWeekDayRate() 
 	{
@@ -51,8 +52,6 @@ public class Hotel
 		this.regularCustomerWeekEndRate = regularCustomerWeekEndRate;
 	}
 
-
-
 	public List<Customer> getCustomers() 
 	{
 		return customers;
@@ -63,18 +62,26 @@ public class Hotel
 		this.customers = customers;
 	}
 
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+
 
 	public int getRegularCustomerCost(LocalDate initialDate,LocalDate finalDate)
 	{
-		
+
 		Calender calender = new Calender(initialDate, finalDate);
 		int numberOfWeekDays=calender.getNumberOfWeekDays();
 		int numberOfWeekends=calender.getNumberOfWeekends();
-		
+
 		return (this.regularCustomerWeekDayRate*numberOfWeekDays)+(this.regularCustomerWeekEndRate*numberOfWeekends);
 	}
 
-	
 
 	@Override
 	public boolean equals(Object obj) 
@@ -94,7 +101,7 @@ public class Hotel
 		final Hotel other = (Hotel) obj;
 
 		if(this.name.equals(other.name)==false||(this.regularCustomerWeekDayRate!=other.regularCustomerWeekDayRate)
-		  ||this.regularCustomerWeekEndRate!=other.regularCustomerWeekEndRate)
+				||this.regularCustomerWeekEndRate!=other.regularCustomerWeekEndRate)
 
 		{
 			return false;
@@ -103,7 +110,6 @@ public class Hotel
 
 		return true;
 	}
-
 
 
 
