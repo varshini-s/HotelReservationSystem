@@ -7,7 +7,6 @@ public class Hotel
 {
 	private String name;
 	private int regularCustomerRate;
-
 	private List<Customer> customers;
 
 	public Hotel(String name,int regularCustomerRate) 
@@ -46,6 +45,14 @@ public class Hotel
 	{
 		this.customers = customers;
 	}
+
+
+	public int getCost(int numberOfDays)
+	{
+		return this.regularCustomerRate*numberOfDays;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) 
 
@@ -63,14 +70,12 @@ public class Hotel
 
 		final Hotel other = (Hotel) obj;
 
-
-
 		if(this.name.equals(other.name)==false||(this.regularCustomerRate!=other.regularCustomerRate))
-				{
+
+		{
 			return false;
-				}
 
-
+		}
 
 		return true;
 	}
