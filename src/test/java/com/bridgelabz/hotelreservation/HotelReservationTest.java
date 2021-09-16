@@ -80,6 +80,26 @@ public class HotelReservationTest
 		assertEquals(4,cheapestHotel.getRating());
 		assertEquals(200,cheapestHotel.getRegularCustomerCost(initialDate, finalDate));
 	}
+	
+	@Test
+	public void whenGivenDateRange_ShouldReturnBestRatedHotel()
+	{
+		HotelReservationSystemImpl hotelList = new HotelReservationSystemImpl();
+		hotelList.addHotel("LakeWood", 110,90,3);
+		hotelList.addHotel("BridgeWood", 150,50,4);
+		hotelList.addHotel("RidgeWood", 220,150,5);
+
+		LocalDate initialDate = LocalDate.parse("2021-09-11");
+		LocalDate finalDate = LocalDate.parse("2021-09-12");
+
+		Hotel cheapestHotel=hotelList.findBestRatedHotel(initialDate, finalDate);
+
+		assertEquals("RidgeWood",cheapestHotel.getName());
+		assertEquals(5,cheapestHotel.getRating());
+		assertEquals(370,cheapestHotel.getRegularCustomerCost(initialDate, finalDate));
+		
+		
+	}
 
 
 
