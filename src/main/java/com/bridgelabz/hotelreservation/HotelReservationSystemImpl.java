@@ -2,21 +2,14 @@ package com.bridgelabz.hotelreservation;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.regex.Pattern;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
 import com.bridgelabz.hotelreservation.UserEntryException.ExceptionType;
-
-
 
 
 public class HotelReservationSystemImpl implements HotelReservationSystemIF
 {
-
 
 	List<Hotel> hotelList; 
 
@@ -91,8 +84,6 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 				return cheapHotels;
 			}
 
-
-
 		}
 		catch (NullPointerException e) 
 		{
@@ -120,23 +111,16 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 
 			return cheapestHotel;
 			}
-
-
-
 		}
 		catch (NullPointerException e) 
 		{
 			throw new UserEntryException(ExceptionType.ENTERED_NULL,"Please enter valid customer type");
 		}
-
-		
-
 	}
 
 	@Override
 	public Hotel findBestRatedHotel(LocalDate initialDate,LocalDate finalDate)
 	{
-
 		Hotel bestRateHotel=hotelList.stream().max((firstHotel, secondHotel)->Integer
 				.compare(firstHotel.getRating(), secondHotel.getRating()))
 				.get();
@@ -144,10 +128,4 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 		return bestRateHotel;
 
 	}
-
-
-
-
-
-
 }
