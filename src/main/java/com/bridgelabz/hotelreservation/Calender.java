@@ -3,14 +3,10 @@ package com.bridgelabz.hotelreservation;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.Objects;
-import java.util.*;
 
 
 public class Calender 
@@ -72,7 +68,6 @@ public class Calender
 
 	}
 
-
 	public boolean validateFormatOfDate(String date) 
 	{
 
@@ -80,7 +75,6 @@ public class Calender
 		return pattern.matcher(date).matches();
 
 	}
-
 
 
 }
