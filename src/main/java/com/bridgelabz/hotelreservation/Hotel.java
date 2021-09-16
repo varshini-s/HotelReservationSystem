@@ -1,5 +1,6 @@
 package com.bridgelabz.hotelreservation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -28,6 +29,9 @@ public class Hotel
 		this.name = name;
 	}
 
+
+	
+
 	public int getRegularCustomerWeekDayRate() 
 	{
 		return regularCustomerWeekDayRate;
@@ -42,9 +46,11 @@ public class Hotel
 		return regularCustomerWeekEndRate;
 	}
 
-	public void setRegularCustomerWeekEndRate(int regularCustomerWeekEndRate) {
+	public void setRegularCustomerWeekEndRate(int regularCustomerWeekEndRate) 
+	{
 		this.regularCustomerWeekEndRate = regularCustomerWeekEndRate;
 	}
+
 
 
 	public List<Customer> getCustomers() 
@@ -58,11 +64,17 @@ public class Hotel
 	}
 
 
-	public int getCost(int numberOfDays)
+	public int getRegularCustomerCost(LocalDate initialDate,LocalDate finalDate)
 	{
-		return this.regularCustomerRate*numberOfDays;
+		
+		Calender calender = new Calender(initialDate, finalDate);
+		int numberOfWeekDays=calender.getNumberOfWeekDays();
+		int numberOfWeekends=calender.getNumberOfWeekends();
+		
+		return (this.regularCustomerWeekDayRate*numberOfWeekDays)+(this.regularCustomerWeekEndRate*numberOfWeekends);
 	}
 
+	
 
 	@Override
 	public boolean equals(Object obj) 
