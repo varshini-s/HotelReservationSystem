@@ -9,18 +9,42 @@ public class Hotel
 	private String name;
 	private int regularCustomerWeekDayRate;
 	private int regularCustomerWeekEndRate;
+	private int rewardCustomerWeekDayRate;
+	private int rewardCustomerWeekEndRate;
 	private int rating;
 
 
 	private List<Customer> customers;
 
-	public Hotel(String name,int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rating ) 
+	public Hotel(String name,int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rewardCustomerWeekDayRate,int rewardCustomerWeekEndRate, int rating ) 
 	{
 		this.name=name;
 		this.regularCustomerWeekDayRate=regularCustomerWeekDayRate;
 		this.regularCustomerWeekEndRate=regularCustomerWeekEndRate;
+		this.rewardCustomerWeekDayRate=rewardCustomerWeekDayRate;
+		this.rewardCustomerWeekEndRate=rewardCustomerWeekEndRate;
 		this.rating=rating;
 
+	}
+
+	public int getRewardCustomerWeekDayRate() 
+	{
+		return rewardCustomerWeekDayRate;
+	}
+
+	public void setRewardCustomerWeekDayRate(int rewardCustomerWeekDay) 
+	{
+		this.rewardCustomerWeekDayRate = rewardCustomerWeekDay;
+	}
+
+	public int getRewardCustomerWeekEndrate() 
+	{
+		return rewardCustomerWeekEndRate;
+	}
+
+	public void setRewardCustomerWeekEndrate(int rewardCustomerWeekEndrate)
+	{
+		this.rewardCustomerWeekEndRate = rewardCustomerWeekEndrate;
 	}
 
 	public String getName() 
@@ -100,8 +124,12 @@ public class Hotel
 
 		final Hotel other = (Hotel) obj;
 
+	
 		if(this.name.equals(other.name)==false||(this.regularCustomerWeekDayRate!=other.regularCustomerWeekDayRate)
-				||this.regularCustomerWeekEndRate!=other.regularCustomerWeekEndRate)
+				||this.regularCustomerWeekEndRate!=other.regularCustomerWeekEndRate
+				||this.rewardCustomerWeekDayRate!=other.rewardCustomerWeekDayRate
+				||this.rewardCustomerWeekEndRate!=other.rewardCustomerWeekEndRate
+				||this.rating!=other.rating)
 
 		{
 			return false;
