@@ -1,11 +1,12 @@
 package com.bridgelabz.hotelreservation;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Objects;
-
+import java.util.stream.Collectors;
 
 public class HotelReservationSystemImpl implements HotelReservationSystemIF
 {
@@ -26,19 +27,29 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 	@Override
 	public Hotel getHotel(String name) 
 	{
-		
+
 		return hotelList.stream()
-				.filter(hotel -> Objects.equals(hotel.getName(),name))
-				.findFirst()
-				.orElse(null);	
+						.filter(hotel -> Objects.equals(hotel.getName(),name))
+						.findFirst()
+						.orElse(null);	
 	}
 
 	@Override
-	public Hotel findCheapestHotel(int numberOfDays) 
+	public List<Hotel> findCheapestHotel(LocalDate initialDate,LocalDate finalDate) 
 
 	{
-		Hotel cheapHotel=hotelList.stream().min((firstHotel, secondHotel) -> Integer.compare(firstHotel.getCost(numberOfDays), secondHotel.getCost(numberOfDays))).get();
-		return cheapHotel;
+		Integer cost=hotelList.stream()
+					.min((firstHotel, secondHotel)->Integer
+					.compare(firstHotel.getRegularCustomerCost(initialDate,finalDate), secondHotel.getRegularCustomerCost(initialDate,finalDate)))
+					.get()
+					.getRegularCustomerCost(initialDate, finalDate);
+
+
+		List<Hotel> cheapHotels = new ArrayList<Hotel>();
+		cheapHotels=hotelList.stream().
+					filter(hotel->hotel.getRegularCustomerCost(initialDate, finalDate)==cost)
+					.collect(Collectors.toList());
+		return cheapHotels;
 	}
 
 
