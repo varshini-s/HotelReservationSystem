@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -35,14 +36,20 @@ public class HotelReservationTest
 		hotelList.addHotel("BridgeWood", 150,50);
 		hotelList.addHotel("RidgeWood", 220,150);
 
-		LocalDate initialDate = LocalDate.parse("2020-09-10");
-		LocalDate finalDate = LocalDate.parse("2020-09-11");
-		int numberOfDays = Period.between(initialDate, finalDate).getDays()+1;
+		LocalDate initialDate = LocalDate.parse("2021-09-11");
+		LocalDate finalDate = LocalDate.parse("2021-09-12");
 
-		assertEquals(hotelList.findCheapestHotel(numberOfDays).getName(),"LakeWood");
-		assertEquals(hotelList.findCheapestHotel(numberOfDays).getCost(numberOfDays),220);
+		List<Hotel> cheapHotels=hotelList.findCheapestHotel(initialDate,finalDate);
+
+		//expected list of cheap hotels
+		HotelReservationSystemImpl cheapHotelExpected = new HotelReservationSystemImpl();
+		cheapHotelExpected.addHotel("LakeWood", 110,90);
+		cheapHotelExpected.addHotel("BridgeWood", 150,50);
+
+		assertEquals(cheapHotels, cheapHotelExpected.hotelList);
+		assertEquals(hotelList.findCheapestHotel(initialDate,finalDate).get(0).getRegularCustomerCost(initialDate,finalDate),200);
 	}
-	
-	
+
+
 
 }
