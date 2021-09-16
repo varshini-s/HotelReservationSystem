@@ -15,26 +15,34 @@ public class HotelReservationTest
 	public void whenAddedNewHotel_ItMustBeAddedToList() 
 	{
 		HotelReservationSystemImpl hotelList = new HotelReservationSystemImpl();
-		hotelList.addHotel("LakeWood", 1000);
+		hotelList.addHotel("LakeWood", 110,90);
+		hotelList.addHotel("BridgeWood", 150,50);
+		hotelList.addHotel("RidgeWood", 220,150);
 
-		assertEquals(hotelList.getHotel("LakeWood"), new Hotel("LakeWood", 1000));
+		Hotel hotel=hotelList.getHotel("LakeWood");
+		assertEquals(hotelList.getHotel("LakeWood"), new Hotel("LakeWood", 110,90));
+		assertEquals(hotelList.getHotel("BridgeWood"), new Hotel("BridgeWood", 150,50));
+		assertEquals(hotelList.getHotel("RidgeWood"), new Hotel("RidgeWood", 220,150));
+
 
 	}
 
 	@Test
 	public void whenGivenHotelsList_ShouldReturnCheapestHotel()
 	{
-		HotelReservationSystemImpl hotelist = new HotelReservationSystemImpl();
-		hotelist.addHotel("LakeWood", 110);
-		hotelist.addHotel("BridgeWood", 160);
-		hotelist.addHotel("RidgeWood", 220);
+		HotelReservationSystemImpl hotelList = new HotelReservationSystemImpl();
+		hotelList.addHotel("LakeWood", 110,90);
+		hotelList.addHotel("BridgeWood", 150,50);
+		hotelList.addHotel("RidgeWood", 220,150);
 
 		LocalDate initialDate = LocalDate.parse("2020-09-10");
 		LocalDate finalDate = LocalDate.parse("2020-09-11");
 		int numberOfDays = Period.between(initialDate, finalDate).getDays()+1;
 
-		assertEquals(hotelist.findCheapestHotel(numberOfDays).getName(),"LakeWood");
-		assertEquals(hotelist.findCheapestHotel(numberOfDays).getCost(numberOfDays),220);
+		assertEquals(hotelList.findCheapestHotel(numberOfDays).getName(),"LakeWood");
+		assertEquals(hotelList.findCheapestHotel(numberOfDays).getCost(numberOfDays),220);
 	}
+	
+	
 
 }
