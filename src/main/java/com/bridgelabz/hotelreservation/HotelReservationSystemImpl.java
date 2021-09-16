@@ -35,7 +35,7 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 	}
 
 	@Override
-	public List<Hotel> findCheapestHotel(LocalDate initialDate,LocalDate finalDate) 
+	public List<Hotel> findCheapestHotelsList(LocalDate initialDate,LocalDate finalDate) 
 
 	{
 		Integer cost=hotelList.stream()
@@ -52,6 +52,20 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 		return cheapHotels;
 	}
 
+	@Override
+	public Hotel findCheapHotelWithBestRating(LocalDate initialDate,LocalDate finalDate)
+	{
+		List<Hotel> cheapHotels=this.findCheapestHotelsList(initialDate, finalDate);
+		
+		Hotel cheapestHotel=cheapHotels.stream().max((firstHotel, secondHotel)->Integer
+							.compare(firstHotel.getRating(), secondHotel.getRating()))
+							.get();
+		
+		return cheapestHotel;
+		
+	}
+
+	
 
 
 

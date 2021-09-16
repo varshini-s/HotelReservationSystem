@@ -8,7 +8,9 @@ public interface HotelReservationSystemIF
 {
 	public void addHotel(String name, int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rating);
 	public Hotel getHotel(String name);
-	public List<Hotel> findCheapestHotel(LocalDate initialDate,LocalDate finalDate);
+	public List<Hotel> findCheapestHotelsList(LocalDate initialDate,LocalDate finalDate);
+	public Hotel findCheapHotelWithBestRating(LocalDate initialDate,LocalDate finalDate);
+
 	
 	
 
