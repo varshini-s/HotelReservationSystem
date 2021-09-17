@@ -133,5 +133,18 @@ public class HotelReservationSystemTest
 		boolean isValid=calenderOperation.validateFormatOfDate(date);
 		Assert.assertTrue(isValid);
 	}
-	
+	@Test
+	public void whenEnteredNullDates_ShouldThrowException()
+	{
+		try 
+		{
+			hotelReservationSystem.findCheapestHotelsList(null,null,Customer.CustomerType.REGULAR_CUSTOMER);
+		}
+		catch (UserEntryException e) 
+		{
+			Assert.assertEquals(ExceptionType.ENTERED_NULL ,e.type);
+		}
+	}
+
+
 }
