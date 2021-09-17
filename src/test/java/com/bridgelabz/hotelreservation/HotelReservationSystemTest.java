@@ -125,6 +125,13 @@ public class HotelReservationSystemTest
 		Assert.assertEquals(140,cheapestHotel.getRewardCustomerCost(startDate, endDate));
 	}
 
-
-
+	@Test
+	public void whenGivenvalidDateFormat_ShouldReturnTrue()
+	{
+		String date="10Jan2020";
+		DateServiceProvider calenderOperation = new DateServiceProvider();
+		boolean isValid=calenderOperation.validateFormatOfDate(date);
+		Assert.assertTrue(isValid);
+	}
+	
 }
