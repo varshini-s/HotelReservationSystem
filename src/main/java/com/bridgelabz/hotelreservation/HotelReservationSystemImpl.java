@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import com.bridgelabz.hotelreservation.UserEntryException.ExceptionType;
+import java.util.*;
 
-
-public class HotelReservationSystemImpl implements HotelReservationSystemIF
+public class HotelReservationSystemImpl implements HotelReservationSystem
 {
 
 	List<Hotel> hotelList; 
@@ -19,9 +19,9 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 	}
 
 	@Override
-	public void addHotel(String name, int regularCustomerWeekDayRate,int regularCustomerWeekEndRate,int rewardCustomerWeekDayRate,int rewardCustomerWeekEndrate,int rating) 
+	public void addHotel(Hotel hotel) 
 	{
-		hotelList.add(new Hotel(name,regularCustomerWeekDayRate,regularCustomerWeekEndRate,rewardCustomerWeekDayRate,rewardCustomerWeekEndrate,rating));
+		hotelList.add(hotel);
 
 	}
 
@@ -36,90 +36,67 @@ public class HotelReservationSystemImpl implements HotelReservationSystemIF
 	}
 
 	@Override
-	public List<Hotel> findCheapestHotelsList(LocalDate initialDate,LocalDate finalDate,String customerType) 
+	public List<Hotel> findCheapestHotelsList(String initialDate,String finalDate,Customer.CustomerType customer) 
 
 	{
-		List<Hotel> cheapHotels = null;
-		try
-		{
-			if(customerType.isEmpty())
-			{
-				throw new UserEntryException(ExceptionType.ENTERED_EMPTY,"Please enter valid customer type");
-			}
-			else
-			{		
-				if((customerType.toLowerCase()).equals("regular"))
-				{
-					Integer cost=hotelList.stream()
-							.min((firstHotel, secondHotel)->Integer
-									.compare(firstHotel.getRegularCustomerCost(initialDate,finalDate), secondHotel.getRegularCustomerCost(initialDate,finalDate)))
-							.get()
-							.getRegularCustomerCost(initialDate, finalDate);
+		List<Hotel> cheapHotels = new ArrayList<Hotel>();
+		DateServiceProvider dateservice = new DateServiceProvider();
+		dateservice.dateValidation(initialDate, finalDate);
 
 
-					cheapHotels = new ArrayList<Hotel>();
-					cheapHotels=hotelList.stream().
-							filter(hotel->hotel.getRegularCustomerCost(initialDate, finalDate)==cost)
-							.collect(Collectors.toList());
+		if(Customer.CustomerType.REGULAR_CUSTOMER.equals(customer))
+		{	
+			Long cost=this.hotelList.stream()
+					.min((firstHotel, secondHotel)->Long
+							.compare(firstHotel.getRegularCustomerCost(initialDate,finalDate), secondHotel.getRegularCustomerCost(initialDate,finalDate)))
+					.get()
+					.getRegularCustomerCost(initialDate, finalDate);
 
-					
-				}
-				else if((customerType.toLowerCase()).equals("reward"))
-				{
-					Integer cost=hotelList.stream()
-							.min((firstHotel, secondHotel)->Integer
-									.compare(firstHotel.getRewardCustomerCost(initialDate,finalDate), secondHotel.getRewardCustomerCost(initialDate,finalDate)))
-							.get()
-							.getRewardCustomerCost(initialDate, finalDate);
+			cheapHotels=hotelList.stream().
+					filter(hotel->hotel.getRegularCustomerCost(initialDate, finalDate)==cost)
+					.collect(Collectors.toList());
 
-
-					cheapHotels = new ArrayList<Hotel>();
-					cheapHotels=hotelList.stream().
-							filter(hotel->hotel.getRewardCustomerCost(initialDate, finalDate)==cost)
-							.collect(Collectors.toList());
-
-					
-				}
-
-				return cheapHotels;
-			}
 
 		}
-		catch (NullPointerException e) 
+		else if(Customer.CustomerType.REWARD_CUSTOMER.equals(customer))
 		{
-			throw new UserEntryException(ExceptionType.ENTERED_NULL,"Please enter valid customer type");
+			Long cost=hotelList.stream()
+					.min((firstHotel, secondHotel)->Long
+							.compare(firstHotel.getRewardCustomerCost(initialDate,finalDate), secondHotel.getRewardCustomerCost(initialDate,finalDate)))
+					.get()
+					.getRewardCustomerCost(initialDate, finalDate);
+
+
+			cheapHotels = new ArrayList<Hotel>();
+			cheapHotels=hotelList.stream().
+					filter(hotel->hotel.getRewardCustomerCost(initialDate, finalDate)==cost)
+					.collect(Collectors.toList());
+
+
 		}
+
+		return cheapHotels;
 
 	}
 
-
 	@Override
-	public Hotel findCheapHotelWithBestRating(LocalDate initialDate,LocalDate finalDate,String customerType)
+	public Hotel findCheapHotelWithBestRating(String initialDate,String finalDate,Customer.CustomerType customer)
 	{
-		try
-		{
-			if(customerType.isEmpty())
-			{
-				throw new UserEntryException(ExceptionType.ENTERED_EMPTY,"Please enter valid customer type");
-			}
-			else
-			{	List<Hotel> cheapHotels=this.findCheapestHotelsList(initialDate, finalDate,customerType);
+		DateServiceProvider dateservice = new DateServiceProvider();
+		dateservice.dateValidation(initialDate, finalDate);
 
-			Hotel cheapestHotel=cheapHotels.stream().max((firstHotel, secondHotel)->Integer
-					.compare(firstHotel.getRating(), secondHotel.getRating()))
-					.get();
+		List<Hotel> cheapHotels=this.findCheapestHotelsList(initialDate, finalDate,customer);
 
-			return cheapestHotel;
-			}
-		}
-		catch (NullPointerException e) 
-		{
-			throw new UserEntryException(ExceptionType.ENTERED_NULL,"Please enter valid customer type");
-		}
+		Hotel cheapestHotel=cheapHotels.stream().max((firstHotel, secondHotel)->Integer
+				.compare(firstHotel.getRating(), secondHotel.getRating()))
+				.get();
+
+		return cheapestHotel;
+
 	}
 
 	@Override
-	public Hotel findBestRatedHotel(LocalDate initialDate,LocalDate finalDate)
+	public Hotel findBestRatedHotel(String initialDate,String finalDate)
 	{
 		Hotel bestRateHotel=hotelList.stream().max((firstHotel, secondHotel)->Integer
 				.compare(firstHotel.getRating(), secondHotel.getRating()))
