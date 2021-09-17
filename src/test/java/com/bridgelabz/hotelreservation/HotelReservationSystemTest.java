@@ -207,6 +207,14 @@ public class HotelReservationSystemTest
 		calenderOperations.setFinalDate(finalDate);
 		Assert.assertEquals(3, calenderOperations.getNumberOfWeekDays());
 	}
-
+	@Test
+	public void whenGivenDateRange_IfProperShouldReturnNumberOfWeekends()
+	{
+		String initialDate="17Sep2021";
+		String finalDate="20Sep2021";
+		calenderOperations.setInitialDate(initialDate);
+		calenderOperations.setFinalDate(finalDate);
+		Assert.assertEquals(1, calenderOperations.getNumberOfWeekends());
+	}
 
 }
