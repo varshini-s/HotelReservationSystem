@@ -158,6 +158,21 @@ public class HotelReservationSystemTest
 			Assert.assertEquals(ExceptionType.ENTERED_EMPTY ,e.type);
 		}
 	}
-	
+	@Test
+	public void whenGivenInvalidDateFormat_ShouldThrowException()
+	{
+
+		try 
+		{
+			String initialDate="123-123";
+			String finalDate="10Jan2020";
+			hotelReservationSystem.findCheapestHotelsList(initialDate,finalDate,Customer.CustomerType.REGULAR_CUSTOMER);
+		}
+		catch (UserEntryException e) 
+		{
+			Assert.assertEquals(ExceptionType.INVALID_DATE_FORMAT ,e.type);
+		}
+	}
+
 
 }
