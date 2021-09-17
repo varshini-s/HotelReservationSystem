@@ -174,5 +174,21 @@ public class HotelReservationSystemTest
 		}
 	}
 
+	@Test
+	public void whenGiven_FinalDateLesserThanInitialDate_ShouldThrowException()
+	{
+		try 
+		{
+			String initialDate="10Aug2020";
+			String finalDate="09Aug2020";
+			hotelReservationSystem.findCheapestHotelsList(initialDate,finalDate,Customer.CustomerType.REGULAR_CUSTOMER);
+		}
+		catch (UserEntryException e) 
+		{
+			Assert.assertEquals(ExceptionType.INVALID_DATES_ORDER ,e.type);
+		}
+	}
+
+	
 
 }
