@@ -146,5 +146,18 @@ public class HotelReservationSystemTest
 		}
 	}
 
+	@Test
+	public void whenEnteredEmptyDates_ShouldThrowException()
+	{
+		try 
+		{
+			hotelReservationSystem.findCheapestHotelsList("","",Customer.CustomerType.REGULAR_CUSTOMER);
+		}
+		catch (UserEntryException e) 
+		{
+			Assert.assertEquals(ExceptionType.ENTERED_EMPTY ,e.type);
+		}
+	}
+	
 
 }
