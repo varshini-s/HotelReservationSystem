@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 import com.bridgelabz.hotelreservation.UserEntryException.ExceptionType;
 import java.util.*;
 
-public class HotelReservationSystemImpl implements HotelReservationSystem
+public class HotelReservationServiceImpl implements HotelReservationServiceIF
 {
 
 	List<Hotel> hotelList; 
 
-	public HotelReservationSystemImpl() 
+	public HotelReservationServiceImpl() 
 	{
 		hotelList= new ArrayList<Hotel>();
 	}

@@ -9,9 +9,9 @@ import org.junit.Test;
 import com.bridgelabz.hotelreservation.UserEntryException.ExceptionType;
 
 
-public class HotelReservationSystemTest 
+public class HotelReservationServiceTest 
 {
-	public HotelReservationSystemImpl hotelReservationSystem;
+	public HotelReservationServiceImpl hotelReservationSystem;
 	Hotel firstHotel;
 	Hotel secondHotel;
 	Hotel thirdHotel;
@@ -22,7 +22,7 @@ public class HotelReservationSystemTest
 	@Before 
 	public  void initialSetup()
 	{
-		hotelReservationSystem = new HotelReservationSystemImpl();
+		hotelReservationSystem = new HotelReservationServiceImpl();
 		firstHotel = new Hotel("LakeWood",110,90,80,80,3);
 		hotelReservationSystem.addHotel(firstHotel);
 
